@@ -17,20 +17,28 @@ describe('GET requests', () => {
 
 });
 
-// TEST THE REST API ENDPOINT FOR PUT
-describe('CREATE request', () => {
-    
-    test('CREATE product test', async () => {
-	// TEST IN HERE
-    });
-
+// TEST THE REST API ENDPOINT FOR POST
+describe('The Create request is invoked', () => {
+    test('it should return a HTTP code of 201', async () => {
+        const res = await request(app)
+          .post('/product/create')
+          .send(build("Toaster", "Cheap Bread Warmer", 10))
+        
+          expect(res.statusCode).toBe(201)
+    });        
 });
 
 // UNIT TEST THE PRODUCT BUILDER
-describe('Unit Tests', () => {
-
-    test('product object builder', () => {
-        // TEST IN HERE
+describe('The product builder is called with values', () => {
+    test('it should return the correct product', () => {
+        let expectedProduct = {
+            name: "Kettle",
+            description: "Water Hotter",
+            price: 5
+        };
+        let product = build("Kettle", "Water Hotter", 5)
+        
+        expect(product).toEqual(expectedProduct);
     });
 
 });
