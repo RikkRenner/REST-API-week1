@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: restapp
+spec:
+  selector:
+    app: restapp
+  ports: 
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: restapp
+  labels: 
+    app: restapp
+spec:
+  selector:
+    matchLabels:
+      app: restapp
+  template:
+    metadata:
+      labels:
+        app: restapp
+    spec:
+      containers:
+      - name: restapp
+        image: restapp:latest
+        ports:
+        - containerPort: 80
