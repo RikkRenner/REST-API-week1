@@ -1,5 +1,7 @@
 FROM node:14
 COPY . . 
-RUN NPM INSTALL
-EXPOSE 80
+RUN npm install
+run npm install jest
+ENV PORT="9000"
+EXPOSE $PORT
 CMD ["npm", "start"]
