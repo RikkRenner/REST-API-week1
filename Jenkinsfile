@@ -1,21 +1,21 @@
 pipeline{
         agent any
         stages{
-            stage('Ensure permissions'){
+            stage('install node modules'){
                 steps{
-                    sh "chmod +x -R ${env.WORKSPACE}"
+                    sh "npm install"
+                    sh "npm install jest"
                 }
             }
-            stage('run dockerBuild'){
+            stage('run tests'){
                 steps{
-                    sh "./buildScripts/dockerBuild.sh"
+                    sh "npm test"
                 }
             }
-            stage('run dockerRun'){
+            stage('build node app'){
                 steps{
-                    sh "./buildScripts/dockerBuild.sh"
+                    sh "npm build ."
                 }
-            }
-            
+            } 
         }
 }
